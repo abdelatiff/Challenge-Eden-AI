@@ -37,12 +37,11 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" target="_blank" href="{% url 'store:cart_detail' %}">Cart </a></div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </nav>
@@ -76,6 +75,10 @@
                                     <!-- Product price-->
                                     {{item.price}} €
                                 </div>
+                                <a href="{% url 'store:cart_add' item.id %}">Add To Cart</a>
+<a href="{% url 'store:cart_clear' %}">Clear Cart</a>
+<a href="{% url 'store:item_increment' item.id %}">Increament</a>
+<a href="{% url 'store:item_decrement' item.id %}">Decrement</a>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
