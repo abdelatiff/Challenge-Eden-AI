@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
+from cart.cart import Cart
 # Create your views here.
 lst = [['Fromage','1','fromage.jpg',3.0],['Pain','2','pain.jpg',1.0],['Tomate','3','tomate.jpg',1.0]]
 def store(request):
@@ -28,3 +29,44 @@ def store(request):
     print(query_results)
     context = {'query_results': query_results}
     return render(request, 'store.html',context=context)
+
+
+
+
+
+def cart_add(request, id):
+    cart = Cart(request)
+    Product = product.objects.get(id=id)
+    cart.add(product=Product)
+    return redirect("/")
+
+
+
+def item_clear(request, id):
+    cart = Cart(request)
+    Product = product.objects.get(id=id)
+    cart.remove(Product)
+    return redirect("/cart/cart_detail/")
+
+
+
+def item_increment(request, id):
+    cart = Cart(request)
+    Product = product.objects.get(id=id)
+    cart.add(product=Product)
+    return redirect("/")
+
+
+
+
+
+
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("/")
+
+
+
+def cart_detail(request):
+    return render(request, 'cart.html')
